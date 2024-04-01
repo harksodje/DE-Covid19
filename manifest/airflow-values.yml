@@ -1,0 +1,80 @@
+#default
+webserverSecretKey: "8626d572710ab08dbf5dfdbb40f7f301"
+executor: "LocalKubernetesExecutor"
+# extraSecret: 
+statsd:
+  enabled: true
+
+redis: 
+  enabled: false
+
+
+# using e
+postgresql:
+  enabled: false
+  
+data:
+  metadataConnection:
+    host: postgres-service.database.svc.cluster.local
+    port: 5432
+    pass: adis-airflow
+    user: adis-airflow
+  
+pgbouncer:
+  enabled: true
+  annotations: {
+    "producer": "adis-airflow"
+  }
+  service: 
+    extraAnnotations: {
+      "producer": "adis-airflow"
+    }
+  replicas: 2
+  podAnnotations: {
+    "producer": "adis-airflow"
+  }
+  maxClientConn: 50
+  metadataPoolSize: 5
+  resultBackendPoolSize: 5
+
+dags:
+  gitSync:
+    enabled: false
+    repo: ""
+    branch: ""
+    containerName: ""
+    period: "30s"
+  # persistence:
+  #   enabled: false
+  #   accessMode: ReadWriteOnce
+  #   size: 1Gi
+  #   storageClass: ""
+
+webserver:
+  enabled: true
+
+enableBuiltInSecretEnvVars:
+  AIRFLOW__CELERY__BROKER_URL: false
+  # AIFLOW__CELERY__CELERY_RESULT_BACKEND: false
+  # AIRFLOW__CELERY__RESULT_BACKEND: false
+  AIRFLOW__CORE__FERNET_KEY: false
+  AIRFLOW__ELASTICSEARCH__HOST: false
+  AIRFLOW__ELASTICSEARCH__ELASTICSEARCH_HOST: false
+  
+airflow:
+  users:
+    ## define the user called "admin" 
+    - username: admin
+      password: admin
+      role: Admin
+      email: admin@example.com
+      firstName: adis
+      lastName: adis
+
+logs:
+  persistence:
+    size: 10Gi
+
+workers:
+  persistence:
+    size: 10Gi
