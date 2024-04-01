@@ -8,7 +8,7 @@ jobs:
       defaults:
         run:
           shell: bash
-          working-directory: /home/runner/work/DE-Covid19/DE-Covid19/terraform/terraform
+          working-directory: ./terraform_
       steps:
         - name: Checkout code
           uses: actions/checkout@v4
