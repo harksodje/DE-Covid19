@@ -5,15 +5,15 @@ jobs:
     Terraform-cicd:
       runs-on: ubuntu-latest
 
+      defaults:
+        run:
+          working-directory: ./terraform
       steps:
         - name: Checkout code
           uses: actions/checkout@v4
-          
-        # - uses: hashicorp/setup-terraform@v3
         
-        - name: Setup Terraform
-          working-directory: ./terraform
-          run: |
-            pwd
-            ls -la
+        - name: Terraform Init
+          run: terraform init
+          env: 
+            GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         
