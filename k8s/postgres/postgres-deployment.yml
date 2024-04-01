@@ -8,11 +8,24 @@ spec:
   selector:
     matchLabels:
       component: postgres
+      # team: devops
+    
   template:
     metadata:
       labels:
         component: postgres
+        
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: team
+                    operator: In
+                    values:
+                      - devops
+
       containers:
         - name: postgres
           image: postgres:13
@@ -27,9 +40,11 @@ spec:
               memory: "64Mi"
               cpu: "250m"
             limits:
-              memory: "250Mi"
+              memory: "3Gi"
               cpu: "500m"
       volumes:
         - name: postgres-pvc
           persistentVolumeClaim:
             claimName: postgres-pvc
+      
+    
