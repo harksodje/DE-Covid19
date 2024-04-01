@@ -4,7 +4,7 @@ metadata:
   name: postgres-deployment
   namespace: database
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       component: postgres
@@ -21,7 +21,7 @@ spec:
                 name: postgres-configmap
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgres-pv
+              name: postgres-pvc
           resources:
             requests:
               memory: "64Mi"
@@ -30,7 +30,6 @@ spec:
               memory: "250Mi"
               cpu: "500m"
       volumes:
-        - name: postgres-pv
-          hostPath:
-            path:    /var/lib/postgresql/data
-            type: DirectoryOrCreate
+        - name: postgres-pvc
+          persistentVolumeClaim:
+            claimName: postgres-pvc

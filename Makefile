@@ -27,7 +27,7 @@ airflow-k8s-up:
 
 
 gke-cluster:
-	gcloud container clusters get-credentials gke-test-1 --region=us-central1 --project=integrated-net-411608
+	gcloud container clusters get-credentials test-gke --region=us-central1 --project=integrated-net-411608
 
 
 # gcloud config set account ACCOUNT
