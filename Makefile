@@ -25,4 +25,12 @@ airflow-db-secret:
 airflow-k8s-up: 
 	 helm install apache-airflow/airflow --values manifest/airflow-values.yml --generate-name --namespace airflow
 
-	
+
+gke-cluster:
+	gcloud container clusters get-credentials gke-test-1 --region=us-central1 --project=integrated-net-411608
+
+
+# gcloud config set account ACCOUNT
+# gcloud auth activate-service-account ACCOUNT
+# gcloud auth activate-service-account terraform-datatalk@integrated-net-411608.iam.gserviceaccount.com --key-file=google-acc.json
+# gcloud auth login
