@@ -50,7 +50,7 @@ resource "google_compute_address" "nat" {
   address_type = "EXTERNAL"
   network_tier = "PREMIUM"
 
-  depends_on = [google_project_service.compute]
+  # depends_on = [google_project_service.compute]
 }
 
 resource "google_compute_firewall" "allow-ssh" {
