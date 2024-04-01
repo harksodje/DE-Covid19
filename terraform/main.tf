@@ -7,9 +7,10 @@ provider "kubernetes" {
 }
 
 module "bucket" {
-  source  = "./modules/bucket"
-  project = var.project
-  region  = var.region
+  source  = "./modules/storage"
+  bucket-name = var.bucket-name
+    location = var.region
+    prefix   = var.prefix
   
 }
 
