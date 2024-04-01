@@ -24,3 +24,5 @@ airflow-db-secret:
 
 airflow-k8s-up: 
 	 helm install apache-airflow/airflow --values manifest/airflow-values.yml --generate-name --namespace airflow
+
+	

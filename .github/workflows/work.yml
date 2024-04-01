@@ -12,7 +12,7 @@ jobs:
         # - uses: hashicorp/setup-terraform@v3
         
         - name: Setup Terraform
-          # working-directory: terraform
+          working-directory: ./terraform
           run: |
             pwd
             ls -la
