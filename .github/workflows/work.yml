@@ -7,9 +7,12 @@ jobs:
 
       steps:
         - name: Checkout code
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
+          
+        - uses: hashicorp/setup-terraform@v3
         
         - name: Setup Terraform
+          working-directory: terraform
           run: |
             cd terraform
             ls -la
