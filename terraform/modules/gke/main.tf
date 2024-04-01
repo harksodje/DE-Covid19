@@ -93,6 +93,10 @@ resource "google_container_cluster" "primary" {
     gcs_fuse_csi_driver_config {
     enabled = true
   }
+
+  gcp_filestore_csi_driver_config {
+    enabled = true
+  }
   }
 
   release_channel {
