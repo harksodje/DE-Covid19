@@ -111,12 +111,13 @@ resource "google_container_cluster" "primary" {
     master_ipv4_cidr_block  = "172.16.0.0/28"
   }
 
+
 }
 
 resource "google_container_node_pool" "spot" {
   name    = "${var.prefix}-node-pool"
   cluster = google_container_cluster.primary.id
-
+  depends_on = [ google_container_cluster.primary ]
   management {
     auto_repair  = true
     auto_upgrade = true
