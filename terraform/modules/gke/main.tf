@@ -144,11 +144,11 @@ resource "google_container_node_pool" "spot" {
       team = "devops"
     }
 
-    taint {
-      key    = "instance_type"
-      value  = "spot"
-      effect = "NO_SCHEDULE"
-    }
+    # taint {
+    #   key    = "instance_type"
+    #   value  = "spot"
+    #   effect = "NO_SCHEDULE"
+    # }
 
     service_account = var.service_account_email
     oauth_scopes = [

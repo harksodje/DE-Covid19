@@ -17,10 +17,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
+  namespace: database
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
-  storageClassName: ""
+  storageClassName: standard-rwo
