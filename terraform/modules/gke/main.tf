@@ -114,7 +114,7 @@ resource "google_container_cluster" "primary" {
 }
 
 resource "google_container_node_pool" "spot" {
-  name    = "${var.prefix}-node-poo;"
+  name    = "${var.prefix}-node-pool"
   cluster = google_container_cluster.primary.id
 
   management {
