@@ -15,7 +15,7 @@ provider "google" {
 
 terraform {
   backend "gcs" {
-    bucket  = "datatalk-storage"
+    bucket  = "datatalk_storage"
     prefix  = "terraform/state"
   }
 }
