@@ -118,7 +118,7 @@ resource "google_container_node_pool" "spot" {
   name    = "${var.prefix}-node-pool"
   cluster = google_container_cluster.primary.id
   depends_on = [ google_container_cluster.primary ]
-  node_count = 2
+  node_count = 1
   management {
     auto_repair  = true
     auto_upgrade = true
