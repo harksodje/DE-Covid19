@@ -26,7 +26,7 @@ module "gke" {
       name                      = "default-node-pool"
       machine_type              = "e2-medium"
       node_locations            = "us-central1-b,us-central1-c"
-      min_count                 = 2
+      min_count                 = 3
       max_count                 = 5
       local_ssd_count           = 0
       spot                      = false
@@ -40,7 +40,7 @@ module "gke" {
       auto_upgrade              = true
       service_account           = "terraform-datatalk@integrated-net-411608.iam.gserviceaccount.com"
       preemptible               = false
-      initial_node_count        = 2
+      initial_node_count        = 3
     },
   ]
 
