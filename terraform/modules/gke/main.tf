@@ -142,9 +142,9 @@ resource "google_container_node_pool" "spot" {
     preemptible  = true
     machine_type = "e2-small"
 
-    # labels = {
-    #   team = "devops"
-    # }
+    labels = {
+      team = "devops"
+    }
 
     # taint {
     #   key    = "instance_type"
