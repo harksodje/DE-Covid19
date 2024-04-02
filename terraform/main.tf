@@ -14,9 +14,9 @@ module "bucket" {
   
 }
 
-module "gke" {
-  source  = "./modules/gke"
-  service_account_email = var.service_account_email
-  prefix  = var.prefix
+# module "gke" {
+#   source  = "./modules/gke"
+#   service_account_email = var.service_account_email
+#   prefix  = var.prefix
   
-}
+# }

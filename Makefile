@@ -23,9 +23,9 @@ airflow-db-secret:
 	kubectl apply -f k8s/airflow/airflow-secret.yml
 
 airflow-k8s-up: 
-	 helm install apache-airflow/airflow --values manifest/airflow-values.yml --generate-name --namespace airflow
+	 helm install apache-airflow/airflow --generate-name --namespace airflow
 
-
+#  helm upgrade apache-airflow/airflow --values manifest/airflow-values.yml --generate-name --namespace airflow
 gke-cluster:
 	gcloud container clusters get-credentials adis-v2-primary --region=us-central1 --project=integrated-net-411608 --region=us-central1-a
 

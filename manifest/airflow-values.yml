@@ -4,6 +4,10 @@ executor: "LocalKubernetesExecutor"
 # extraSecret: 
 statsd:
   enabled: true
+  annotations: {
+    "producer": "adis-airflow",
+    "gke-gcsfuse/volumes": "true"
+  }
 
 redis: 
   enabled: false
@@ -27,7 +31,8 @@ pgbouncer:
   }
   service: 
     extraAnnotations: {
-      "producer": "adis-airflow"
+      "producer": "adis-airflow",
+      "gke-gcsfuse/volumes": "true"
     }
   replicas: 2
   podAnnotations: {
@@ -52,14 +57,27 @@ dags:
 
 webserver:
   enabled: true
+  annotations: {
+    "producer": "adis-airflow",
+    "gke-gcsfuse/volumes": "true"
+  }
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 100m
+      memory: 256Mi
+  
 
-enableBuiltInSecretEnvVars:
-  AIRFLOW__CELERY__BROKER_URL: false
-  # AIFLOW__CELERY__CELERY_RESULT_BACKEND: false
-  # AIRFLOW__CELERY__RESULT_BACKEND: false
-  AIRFLOW__CORE__FERNET_KEY: false
-  AIRFLOW__ELASTICSEARCH__HOST: false
-  AIRFLOW__ELASTICSEARCH__ELASTICSEARCH_HOST: false
+# enableBuiltInSecretEnvVars:
+#   AIRFLOW__CELERY__BROKER_URL: false
+#   # AIFLOW__CELERY__CELERY_RESULT_BACKEND: false
+#   # AIRFLOW__CELERY__RESULT_BACKEND: false
+#   AIRFLOW__CORE__FERNET_KEY: false
+#   AIRFLOW__ELASTICSEARCH__HOST: false
+#   AIRFLOW__ELASTICSEARCH__ELASTICSEARCH_HOST: false
   
 airflow:
   users:
@@ -74,7 +92,29 @@ airflow:
 logs:
   persistence:
     size: 10Gi
+    annotations: {
+      "producer": "adis-airflow",
+      "gke-gcsfuse/volumes": "true"
+    }
 
 workers:
   persistence:
     size: 10Gi
+  annotations: {
+      "producer": "adis-airflow",
+      "gke-gcsfuse/volumes": "true"
+    }
+
+scheduler:
+  annotations: {
+    "producer": "adis-airflow",
+    "gke-gcsfuse/volumes": "true"
+  }
+
+triggerer:
+  annotations: {
+    "producer": "adis-airflow",
+    "gke-gcsfuse/volumes": "true"
+  }
+  replicas: 1
+
