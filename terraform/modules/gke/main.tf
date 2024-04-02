@@ -71,7 +71,7 @@ resource "google_container_cluster" "primary" {
   name                     = "${var.prefix}-primary"
   location                 = "us-central1-a"
   remove_default_node_pool = true
-  initial_node_count       = 0
+  initial_node_count       = 1
   network                  = google_compute_network.main.self_link
   subnetwork               = google_compute_subnetwork.private.self_link
   logging_service          = "logging.googleapis.com/kubernetes"
@@ -118,9 +118,9 @@ resource "google_container_cluster" "primary" {
     master_ipv4_cidr_block  = "172.16.0.0/28"
   }
 
-  # node_config {
-    
-  # }
+  node_config {
+    service_account = var.service_account_email
+  }
 }
 
 resource "google_container_node_pool" "spot" {
