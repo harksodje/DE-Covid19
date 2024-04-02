@@ -1,0 +1,17 @@
+global:
+  postgresql:
+    auth:
+      username: adis-username
+      password: adis-password
+      database: adis-database
+
+
+primary:
+  nodeAffinityPresent:
+      key: team
+      operator: In
+      values:
+        - devops
+
+readReplicas:
+  replicaCount: 2

@@ -36,3 +36,5 @@ gke-cluster:
 # gcloud auth login
 
 # kubectl get pod airflow-1711988738-webserver -n airflow  --template='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
+
+# helm repo add postgres oci://registry-1.docker.io/bitnamicharts/postgresql
