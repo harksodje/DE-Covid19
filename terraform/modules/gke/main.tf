@@ -77,7 +77,7 @@ resource "google_container_cluster" "primary" {
   logging_service          = "logging.googleapis.com/kubernetes"
   monitoring_service       = "monitoring.googleapis.com/kubernetes"
   networking_mode          = "VPC_NATIVE"
-  # deletion_protection = false
+  deletion_protection = false
   # Optional, if you want multi-zonal cluster
   node_locations = [
     "us-central1-b"
@@ -142,9 +142,9 @@ resource "google_container_node_pool" "spot" {
     preemptible  = true
     machine_type = "e2-small"
 
-    labels = {
-      team = "devops"
-    }
+    # labels = {
+    #   team = "devops"
+    # }
 
     # taint {
     #   key    = "instance_type"
