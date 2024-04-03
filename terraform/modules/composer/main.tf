@@ -1,31 +1,50 @@
+provider "google" {
+  project = "bigdata-writers"
+}
+
 resource "google_composer_environment" "test" {
-  name   = "example-composer-env"
+  name   = "example-composer-env-tf-c2"
   region = "us-central1"
   config {
-    node_count = 4
+
+    software_config {
+      image_version = "composer-2-airflow-2"
+    }
+
+    workloads_config {
+      scheduler {
+        cpu        = 0.5
+        memory_gb  = 1.875
+        storage_gb = 1
+        count      = 1
+      }
+      web_server {
+        cpu        = 0.5
+        memory_gb  = 1.875
+        storage_gb = 1
+      }
+      worker {
+        cpu = 0.5
+        memory_gb  = 1.875
+        storage_gb = 1
+        min_count  = 1
+        max_count  = 3
+      }
+
+
+    }
+    environment_size = "ENVIRONMENT_SIZE_SMALL"
 
     node_config {
-      zone         = "us-central1-a"
-      machine_type = "n1-standard-1"
-
       network    = google_compute_network.test.id
       subnetwork = google_compute_subnetwork.test.id
-
       service_account = google_service_account.test.name
-    }
-
-    database_config {
-      machine_type = "db-n1-standard-2"
-    }
-
-    web_server_config {
-      machine_type = "composer-n1-webserver-2"
     }
   }
 }
 
 resource "google_compute_network" "test" {
-  name                    = "composer-test-network"
+  name                    = "composer-test-network3"
   auto_create_subnetworks = false
 }
 
@@ -42,7 +61,7 @@ resource "google_service_account" "test" {
 }
 
 resource "google_project_iam_member" "composer-worker" {
-    project = var.project
-    role   = "roles/composer.worker"
-    member = "serviceAccount:${google_service_account.test.email}"
+  project = var.project
+  role    = "roles/composer.worker"
+  member  = "serviceAccount:${google_service_account.test.email}"
 }
