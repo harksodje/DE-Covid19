@@ -38,7 +38,7 @@ resource "google_composer_environment" "test" {
     node_config {
       network    = google_compute_network.test.id
       subnetwork = google_compute_subnetwork.test.id
-      service_account = google_service_account.test.name
+      service_account = var.service_account_email
     }
   }
 }
@@ -55,13 +55,13 @@ resource "google_compute_subnetwork" "test" {
   network       = google_compute_network.test.id
 }
 
-resource "google_service_account" "test" {
-  account_id   = "composer-env-account"
-  display_name = "Test Service Account for Composer Environment"
-}
+# resource "google_service_account" "test" {
+#   account_id   = "composer-env-account"
+#   display_name = "Test Service Account for Composer Environment"
+# }
 
-resource "google_project_iam_member" "composer-worker" {
-  project = var.project
-  role    = "roles/composer.worker"
-  member  = "serviceAccount:${google_service_account.test.email}"
-}
+# resource "google_project_iam_member" "composer-worker" {
+#   project = var.project
+#   role    = "roles/composer.worker"
+#   member  = "serviceAccount:${google_service_account.test.email}"
+# }
