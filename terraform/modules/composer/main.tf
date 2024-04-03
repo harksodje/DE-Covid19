@@ -1,6 +1,6 @@
-provider "google" {
-  project = "bigdata-writers"
-}
+# provider "google" {
+#   project = "bigdata-writers"
+# }
 
 resource "google_composer_environment" "test" {
   name   = "example-composer-env-tf-c2"
