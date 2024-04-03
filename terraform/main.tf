@@ -20,3 +20,8 @@ module "bucket" {
 #   prefix  = var.prefix
   
 # }
+
+module "composer" {
+  source = "./modules/composer"
+  project = var.project
+}
