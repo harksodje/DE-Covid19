@@ -78,7 +78,7 @@ resource "google_composer_environment" "composer_env" {
       machine_type    = "n1-standard-1"
       network         = "default"
       subnetwork      = "default"
-      service_account = "service-account-id"
+      service_account = var.service_account_email
     }
 
     software_config {
