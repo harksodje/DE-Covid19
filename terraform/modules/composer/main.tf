@@ -69,7 +69,7 @@
 resource "google_composer_environment" "composer_env" {
   name   = "composer-env-adis"
   region = "us-central1"
-
+  project = var.project
   config {
     node_count = 4
 
