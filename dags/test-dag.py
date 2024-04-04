@@ -18,3 +18,7 @@ with DAG (
         python_callable=print_hello
     )
 
+    task2 = DummyOperator(task_id="task2")
+    
+    
+    task1 >> task2
