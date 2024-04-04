@@ -23,7 +23,7 @@ airflow-db-secret:
 	kubectl apply -f k8s/airflow/airflow-secret.yml
 
 airflow-k8s-up: 
-	 helm install apache-airflow/airflow --generate-name --namespace airflow
+	 helm install apache-airflow/airflow --generate-name --namespace airflow --values manifest/airflow-values.yml
 
 #  helm upgrade apache-airflow/airflow --values manifest/airflow-values.yml --generate-name --namespace airflow
 gke-cluster:
@@ -38,4 +38,4 @@ gke-cluster:
 # kubectl get pod airflow-1711988738-webserver -n airflow  --template='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
 
 # helm repo add postgres oci://registry-1.docker.io/bitnamicharts/postgresql
-gcloud container clusters resize adis-v2-primary --num-nodes=0
+# gcloud container clusters resize adis-v2-primary --num-nodes=0
