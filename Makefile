@@ -1,4 +1,5 @@
 PORT := port
+RELEASE := release
 database-namespace:
 	kubectl create namespace database
 
@@ -14,7 +15,7 @@ postgres-port-forward:
 	kubectl port-forward svc/postgres-service 5432:5432 -n database
 
 airflow-port-forward:
-	kubectl port-forward svc/airflow-1712163518-webserver 8080:8080 --namespace airflow
+	kubectl port-forward svc/airflow-1712225942-webserver 8080:8080 --namespace airflow
 
 postgres-port-forward-down:
 	kill $(ps -ef | grep "kubectl port-forward" | grep -v grep | awk '{print $2}')
@@ -25,9 +26,10 @@ airflow-db-secret:
 airflow-k8s-up: 
 	 helm install apache-airflow/airflow --generate-name --namespace airflow --values manifest/airflow-values.yml
 
-#  helm upgrade apache-airflow/airflow --values manifest/airflow-values.yml --generate-name --namespace airflow
-gke-cluster:
-	gcloud container clusters get-credentials adis-v2-primary --region=us-central1 --project=integrated-net-411608 --region=us-central1-a
+airflow-k8s-upgrade:
+	helm upgrade airflow-1712225942 apache-airflow/airflow --namespace airflow --values manifest/airflow-values.yml
+# helm upgrade   airflow-1712225942 apache-airflow/airflow --namespace airflow --values manifest/airflow-values.yml
+# gcloud container clusters get-credentials adis-v2-primary --region=us-central1 --project=integrated-net-411608 --region=us-central1-a
 
 
 # gcloud config set account ACCOUNT

@@ -44,11 +44,13 @@ pgbouncer:
 
 dags:
   gitSync:
-    enabled: false
-    repo: ""
-    branch: ""
-    containerName: ""
+    enabled: true
+    repo: "https://github.com/harksodje/DE-Covid19.git"
+    branch: "main"
+    # containerName: ""
     period: "30s"
+    credentialsSecret: git-credentials
+    sshKeySecret: airflow-git-ssh-secret
   # persistence:
   #   enabled: false
   #   accessMode: ReadWriteOnce
@@ -62,13 +64,13 @@ webserver:
     "gke-gcsfuse/volumes": "true"
   }
   replicas: 1
-  resources:
-    requests:
-      cpu: 100m
-      memory: 256Mi
-    limits:
-      cpu: 100m
-      memory: 256Mi
+  # resources:
+  #   requests:
+  #     cpu: 100m
+  #     memory: 256Mi
+  #   limits:
+  #     cpu: 100m
+  #     memory: 256Mi
   
 
 # enableBuiltInSecretEnvVars:
@@ -79,16 +81,16 @@ webserver:
 #   AIRFLOW__ELASTICSEARCH__HOST: false
 #   AIRFLOW__ELASTICSEARCH__ELASTICSEARCH_HOST: false
   
-airflow:
-  users:
-    ## define the user called "admin" 
-    - username: admin
-      password: admin
-      role: Admin
-      email: admin@example.com
-      firstName: adis
-      lastName: adis
-
+# airflow:
+#   users:
+#     ## define the user called "admin" 
+#     - username: admin_my
+#       password: admin
+#       role: Admin
+#       email: admin@example.com
+#       firstName: adis
+#       lastName: adis
+# Fernet Key: SWRzVDZUTGZQcFAxZGxHSGZETTJiamdRUDYzcm1aS3g=
 logs:
   persistence:
     size: 10Gi
@@ -117,4 +119,6 @@ triggerer:
     "gke-gcsfuse/volumes": "true"
   }
   replicas: 1
+  persistence:
+    size: 10Gi
 
